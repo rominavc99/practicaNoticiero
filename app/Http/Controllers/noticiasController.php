@@ -30,11 +30,9 @@ class noticiasController extends Controller
 
         if ($nuevaNoticia->save()) {
 
-            return redirect()->route('news.index')->
-                with('exito','Noticia creada con exito');
+            return redirect()->route('news.index')->with('exito','Noticia creada con exito');
         }
-        return redirect()->route('news.index')->
-            with('error','No se pudo crear noticia');
+        return redirect()->route('news.index')->with('error','No se pudo crear noticia');
         
 
     }
@@ -52,8 +50,7 @@ class noticiasController extends Controller
 
             } 
 
-            return redirect()->route('news.index')->
-                with('error','No se encontro la noticia');
+            return redirect()->route('news.index')-> with('error','No se encontro la noticia');
 
             
 
@@ -72,18 +69,30 @@ class noticiasController extends Controller
 
             if ($noticia->save()) {
 
-                return redirect()->route('news.edit',$noticia->id)->
-                    with('exito','Noticia actualizada con exito');
+                return redirect()->route('news.edit',$noticia->id)-> with('exito','Noticia actualizada con exito');
 
         }
         return redirect()->
             route('news.edit',$noticia->id)-> with('error','Noticia actualizada con exito');
            
         }
-        return redirect()->route('news.index')->
-                with('error','No se encontro la noticia');
+        return redirect()->route('news.index')-> with('error','No se encontro la noticia');
 
         
+
+    }
+
+    public function destroy($id){
+
+        $noticia = Noticia::find($id);
+        if ($noticia){
+            //si la encuentra, la borra
+            if ($noticia->delete()) {
+                return redirect()->route('news.index')-> with('exito', 'Noticia eliminada');
+            }
+            return redirect()->route('news.index')-> with ('error', 'no se pudo eliminar noticia');
+        }
+        return redirect()->route('news.index')-> with('error','No se encontro noticia para borrar');
 
     }
 

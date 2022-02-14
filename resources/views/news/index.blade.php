@@ -34,7 +34,17 @@
                 <td>{{$noticia->titulo}}</td>
                 <td>{{$noticia->autor}}</td>
                 <td>{{$noticia->fecha}}</td>
-                <td><a href="{{ route('news.edit',$noticia->id) }}" >Editar</a></td>
+
+                <form method= "post" action= "{{route('news.destroy', $noticia->id)}}">
+                <!-- metodo para que funcione el Post (POST METHOD IS NOT SUPORTED FOR THIS ROUTE) -->
+                @csrf
+                @method ('delete')
+
+                    <td>
+                        <a href="{{ route('news.edit',$noticia->id) }}" >Editar</a>
+                        <button type="submit">Eliminar</button>
+                    </td>
+                </form>   
             </tr>
 
         @endforeach

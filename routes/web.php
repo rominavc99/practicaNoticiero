@@ -22,6 +22,7 @@ Route::get('/news/create','noticiasController@create')->name('news.create');
 Route::post('/news/store', 'noticiasController@store')->name('news.store');
 Route::get('/news/{id}/edit', 'noticiasController@edit')->name('news.edit');
 Route::put('/news/{id}/update','noticiasController@update')->name('news.update');
+Route::delete('/news/{id}','noticiasController@destroy')->name('news.destroy');
 
 
 
